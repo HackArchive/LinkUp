@@ -1,11 +1,12 @@
-import { StatusBar } from "expo-status-bar";
-import { Text, View } from "react-native";
+import { StatusBar } from 'expo-status-bar';
+import { NavigationContainer } from '@react-navigation/native';
+import { StyleSheet, Text, View } from 'react-native';
+import BottomNav from './src/navigation/BottomNavigation';
 
 export default function App() {
   return (
-    <View className="flex-1 items-center justify-center bg-white">
-      <Text className="">Hello Hello Hello Hello</Text>
-      <StatusBar style="auto" />
-    </View>
+    <NavigationContainer>
+      <BottomNav/>
+    </NavigationContainer>
   );
 }
