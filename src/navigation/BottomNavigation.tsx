@@ -3,13 +3,13 @@ import Home from '../pages/Home';
 import Icon from "react-native-vector-icons/Ionicons";
 import COLORS from "../constants/colors"
 import CreatePost from '../pages/CreatePost';
+import ProfileSection from '../pages/ProfileSection';
 
 const Tab = createBottomTabNavigator();
 
 export default function BottomNav() {
   return (
     <Tab.Navigator 
-      
       screenOptions={({ route }) => ({
         tabBarStyle:{
           height: 60,
@@ -38,8 +38,8 @@ export default function BottomNav() {
       })}
     >
       <Tab.Screen name="Events" component={Home} />
-      <Tab.Screen name="Profile" component={Home} />
       <Tab.Screen name="CreateEvent" component={CreatePost} />
+      <Tab.Screen name="Profile" component={ProfileSection} />
     </Tab.Navigator>
   );
 }

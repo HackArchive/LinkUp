@@ -104,12 +104,12 @@ export default function Home() {
           ))}
         </View>
       </ScrollView>
-      <TouchableOpacity onPress={()=>(setCreatePostVisible(!createPostVisible))} className="absolute bg-[#f94c83] p-4 rounded-2xl w-fit z-40 bottom-0 right-0 mb-24 mr-5">
+      {/* <TouchableOpacity onPress={()=>(setCreatePostVisible(!createPostVisible))} className="absolute bg-[#f94c83] p-4 rounded-2xl w-fit z-40 bottom-0 right-0 mb-24 mr-5">
         <Icon name="add" size={35} color='#ffffff'/>
       </TouchableOpacity>
       {
         createPostVisible && <CreatePost/>
-      }
+      } */}
     </View>
   );
 }
