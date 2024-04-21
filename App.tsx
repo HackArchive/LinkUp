@@ -13,8 +13,10 @@ import {
 import { REACT_APP_WALLET_CONNECT_PID } from '@env';
 import BottomNav from './src/navigation/BottomNavigation';
 import { createStackNavigator } from '@react-navigation/stack';
+import { createContext } from 'react';
 
-const projectId = REACT_APP_WALLET_CONNECT_PID;
+
+const projectId = "31d6d711ebec0cb290db2dea6571d012";
 
 const providerMetadata = {
   name: 'YOUR_PROJECT_NAME',

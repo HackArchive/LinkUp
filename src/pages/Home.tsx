@@ -45,7 +45,7 @@ export default  function Home() {
         <Pressable className="w-12 py-2 ml-auto">
           <Image
             source={{
-              uri: "https://pbs.twimg.com/profile_images/1699481797158121472/Q0Cefxy8_400x400.jpg",
+              uri: "https://imageio.forbes.com/specials-images/imageserve/5d35eacaf1176b0008974b54/2020-Chevrolet-Corvette-Stingray/0x0.jpg?format=jpg&crop=4560,2565,x790,y784,safe&width=1440",
             }}
             style={{ width: 40, height: 40, borderRadius: 5 }}
             width={40}
@@ -56,7 +56,7 @@ export default  function Home() {
       </View>
       <ScrollView>
         <View className="flex flex-col gap-y-2 py-2">
-          {posts.map((i,index) => (
+          {posts.reverse().map((i,index) => (
             <View key={i.id}>
               <View className="flex flex-row gap-2 px-4 py-4 rounded-[25px] mx-4" style={{
                 shadowColor: '#ffffff',
@@ -64,8 +64,6 @@ export default  function Home() {
                 shadowOpacity: 1,
                 shadowRadius: 3,
               }}>
-
-
                 <View className="flex-1 flex flex-col w-[60vw]">
                   <View className="flex flex-row">
                     <View className="w-14">

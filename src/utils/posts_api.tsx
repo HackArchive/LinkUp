@@ -11,3 +11,19 @@ export const getAllPosts = async () => {
       throw error;
     }
   };
+
+  export const createPosts = async (walletId: string, prompt: string) => {
+    try {
+      const response = await server.get('/auth/create-post', {
+        params: {
+          wallet_id: walletId,
+          prompt: prompt
+        }
+      });
+      return response.data;
+    } catch (error) {
+      console.error('Error creating post:', error);
+      throw error;
+    }
+  };
+  
