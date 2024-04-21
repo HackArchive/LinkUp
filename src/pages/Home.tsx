@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Text,
   View,
@@ -11,18 +11,30 @@ import {
 import { twMerge } from "tailwind-merge";
 import {
   MessageCircle,
-  LocateIcon,
-  DollarSign,
-  Calendar,
-  UsersIcon,
   Heart,
   Share2,
 } from "lucide-react-native";
 import Icon from "react-native-vector-icons/Ionicons";
 import CreatePost from "./CreatePost";
+import { getAllPosts } from "../utils/posts_api";
 
-export default function Home() { 
+export default  function Home() { 
   const [ createPostVisible, setCreatePostVisible ] = useState(false);
+  const [posts, setPosts] = useState<Post[]>([]);
+
+  useEffect(() => {
+    const fetchPosts = async () => {
+      try {
+        const postsData: Response = await getAllPosts();
+        setPosts(postsData.user);
+        console.log(posts)
+      } catch (error) {
+        console.error('Error fetching posts:', error);
+      }
+    };
+
+    fetchPosts();
+  }, []);
   return (
     <View className="bg-[#1c1c1c] text-white">
 
@@ -44,8 +56,8 @@ export default function Home() {
       </View>
       <ScrollView>
         <View className="flex flex-col gap-y-2 py-2">
-          {Array.from({ length: 3 }).map((_, index) => (
-            <View key={index}>
+          {posts.map((i,index) => (
+            <View key={i.id}>
               <View className="flex flex-row gap-2 px-4 py-4 rounded-[25px] mx-4" style={{
                 shadowColor: '#ffffff',
                 shadowOffset: { width: -2, height: 4 },
@@ -59,7 +71,7 @@ export default function Home() {
                     <View className="w-14">
                       <Image
                         source={{
-                          uri: "https://pbs.twimg.com/profile_images/1699481797158121472/Q0Cefxy8_400x400.jpg",
+                          uri: i.user.profile_pic,
                         }}
                         style={{ width: 50, height: 50, borderRadius: 10 }}
                         width={50}
@@ -67,23 +79,21 @@ export default function Home() {
                       />
                     </View>
                     <View className="flex flex-col text-start gap-x-2 items-start">
-                      <Text className="font-bold text-lg text-white">Vape Lover</Text>
-                      <Text className="text-gray-500 text-sm">1d ago</Text>
+                      <Text className="font-bold text-lg text-white">{i.user.name}</Text>
+                      <Text className="text-gray-500 text-sm"></Text>
                     </View>
                   </View>
                   <View className="h-4"></View>
 
                   <Text className="break-words text-white text-base  w-[80vw]">
-                    I'm a vape lover, I absolutely love vapes, especially the
-                    blueberry one. I really hope they leagalize it and allow me
-                    to carry one in airports and also in college lecture
+                    {i.prompt}
                   </Text>
 
                   <View className="h-2.5"></View>
 
                   <Image
                     source={{
-                      uri: "https://pbs.twimg.com/media/GLrHV1fbcAAA870?format=jpg&name=large",
+                      uri: i.imageURL,
                     }}
                     height={250}
                     className="rounded-xl object-cover w-[80vw]"
@@ -113,90 +123,3 @@ export default function Home() {
     </View>
   );
 }
-
-// export function PostCard() {
-//   return (
-//     <Pressable
-//       className="bg-[#131313] p-4 my-2 rounded-2xl w-full"
-//       onPress={() => { }}
-//     >
-//       <View className="flex flex-row justify-center gap-x-2 items-center">
-//         <View className="flex flex-row">
-//           {/* {Array.from({ length: 3 }).map((avatar, i) => (
-//             <Avatar.Image
-//               source={{
-//                 uri: avatar,
-//               }}
-//               size={24}
-//               className={i > 0 ? "-ml-2" : ""}
-//             />
-//           ))} */}
-//         </View>
-
-//         <Text className="text-white text-center">{"peerMessage"}</Text>
-//       </View>
-
-//       {/* <View className="w-[90%] mx-auto h-[1px] my-3 bg-white/50" /> */}
-
-//       <View
-//         className={twMerge(
-//           "w-[90%] mx-auto h-[1px] my-3 bg-white/0 border-t border-white/50 border-r-1",
-//           Platform.OS === "android" ? "border-dashed" : ""
-//         )}
-//       />
-
-//       <View className="flex flex-row" style={{ marginBottom: 10 }}>
-//         <Image
-//           source={{ uri: "event.image" }}
-//           style={{ width: 69, borderRadius: 15, marginRight: 20 }}
-//         />
-
-//         <View className="flex gap-1">
-//           <Text className="text-white text-lg">ETH Async Hack</Text>
-//           <View className="flex flex-row gap-1 items-center">
-//             <LocateIcon size={20} color="#989898" />
-//             <Text className="text-gray-200 font-sans">Online</Text>
-//           </View>
-//           <View className="flex flex-row gap-1 items-center">
-//             <Calendar size={20} color="#989898" />
-//             <Text className="text-gray-200">{"time.toDateString()"}</Text>
-//           </View>
-//         </View>
-//       </View>
-
-//       <View className="flex flex-row justify-between">
-//         <View className="flex flex-row gap-4">
-//           <View className="flex flex-row gap-1 items-center">
-//             <UsersIcon size={24} color="#989898" />
-
-//             <Text className="text-white font-light">0</Text>
-//           </View>
-
-//           <View className="flex flex-row gap-1 items-center">
-//             <DollarSign size={24} color="#989898" />
-//             <Text className="text-white font-light">Free</Text>
-//           </View>
-//         </View>
-
-//         {true ? (
-//           <TouchableOpacity
-//             className="rounded-full p-3 px-3 bg-[#54ADFF]"
-//             onPress={() => { }}
-//           >
-//             <MessageCircle size={24} color="white" />
-//           </TouchableOpacity>
-//         ) : (
-//           <TouchableOpacity
-//             className="rounded-full p-2 px-3 bg-[#1E1E1E]"
-//             disabled={false}
-//             onPress={() => { }}
-//           >
-//             <Text className="font-bold" style={{ color: "#A5219B" }}>
-//               Join them
-//             </Text>
-//           </TouchableOpacity>
-//         )}
-//       </View>
-//     </Pressable>
-//   );
-// }
