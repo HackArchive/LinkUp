@@ -1,62 +1,52 @@
-import React, { useState } from 'react';
-import { Image, Pressable, Text, TextInput, View } from 'react-native';
-import Icon from 'react-native-vector-icons/Entypo';
+import { useEffect, useState } from 'react'
+import { Image, Pressable, Text, TextInput, View } from 'react-native'
+import Icon from 'react-native-vector-icons/Entypo'
 import { createPosts } from '../utils/posts_api';
 
 export default function CreatePost() {
+
   const [postContent, setPostContent] = useState('');
 
+  // const [posts, setPosts] = useState<Post[]>([]);
   const walletId = "0xDF2b85e90F4Aa7bDC724dE4aF08B45cDc7458593";
-  const prompt = "I was in london, saw london bridge.";
+  const prompt = "Web ";
 
-  const fetchPosts = async () => {
+  const CreatePost = async () => {
     try {
-      await createPosts(walletId, prompt);
-      // Clear input after successful post
-      setPostContent('');
-      // You might want to do something else after posting, like showing a success message or navigating back
+      const postsData: Response = await createPosts(walletId, prompt);
+      console.log(postsData)
     } catch (error) {
       console.error('Error fetching posts:', error);
     }
   };
 
   return (
-    <View style={{ flex: 1, backgroundColor: '#1c1c1c' }}>
-      <View style={{ flexDirection: 'row', justifyContent: 'space-between', paddingHorizontal: 10 }}>
-        <Pressable onPress={() => {}} style={{ padding: 10 }}>
+    <View className='absolute top-0 left-0 bg-[#1c1c1c] h-full w-full'>
+      <View className='flex flex-row justify-between'>
+        <Pressable className='p-2' >
           <Icon name='cross' size={40} color='#ffffff' />
         </Pressable>
-        <Pressable
-          onPress={fetchPosts}
-          disabled={postContent.trim() === ''}
-          style={{
-            backgroundColor: postContent.trim() === '' ? '#492f37' : '#f94c83',
-            paddingVertical: 10,
-            paddingHorizontal: 20,
-            margin: 10,
-            borderRadius: 10,
-          }}>
-          <Text style={{ fontSize: 20, color: '#ffffff' }}>Post</Text>
+        <Pressable className='py-2 px-4 bg-[#f94c83] mx-2 my-2 rounded-[10px]' onPress={CreatePost} disabled={postContent === ''} style={postContent === '' ? { backgroundColor: "#492f37" } : {}}>
+          <Text className='text-lg text-white'>Post</Text>
         </Pressable>
       </View>
-      <View style={{ paddingHorizontal: 10, paddingVertical: 20, flexDirection: 'row', alignItems: 'center' }}>
-        <View style={{ width: 50, height: 50, borderRadius: 10 }}>
+      <View className='p-4 flex flex-row gap-x-2'>
+        <View className="w-14">
           <Image
             source={{
               uri: "https://imageio.forbes.com/specials-images/imageserve/5d35eacaf1176b0008974b54/2020-Chevrolet-Corvette-Stingray/0x0.jpg?format=jpg&crop=4560,2565,x790,y784,safe&width=1440",
             }}
             style={{ width: 50, height: 50, borderRadius: 10 }}
+            width={50}
+            height={50}
           />
         </View>
-        <TextInput
-          style={{ flex: 1, color: 'white', fontSize: 20, paddingHorizontal: 10 }}
-          placeholderTextColor='#4c4c4c'
-          placeholder='Whats on your mind?'
-          multiline
+        <TextInput className='text-white text-[20px] px-2 w-[65vw]'
+          placeholderTextColor='#4c4c4c' placeholder='Whats on your mind?' multiline
           onChangeText={setPostContent}
           value={postContent}
-        />
+        ></TextInput>
       </View>
     </View>
-  );
+  )
 }

@@ -14,11 +14,9 @@ export const getAllPosts = async () => {
 
   export const createPosts = async (walletId: string, prompt: string) => {
     try {
-      const response = await server.get('/auth/create-post', {
-        params: {
-          wallet_id: walletId,
-          prompt: prompt
-        }
+      const response = await server.post('/auth/create-post', {
+        wallet_id: walletId,
+        prompt: prompt
       });
       return response.data;
     } catch (error) {
@@ -26,4 +24,3 @@ export const getAllPosts = async () => {
       throw error;
     }
   };
-  

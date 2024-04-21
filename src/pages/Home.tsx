@@ -27,14 +27,13 @@ export default  function Home() {
       try {
         const postsData: Response = await getAllPosts();
         setPosts(postsData.user);
-        console.log(posts)
+        // console.log(posts)
       } catch (error) {
         console.error('Error fetching posts:', error);
       }
     };
-
     fetchPosts();
-  }, []);
+  },);
   return (
     <View className="bg-[#1c1c1c] text-white">
 
