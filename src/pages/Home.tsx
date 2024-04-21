@@ -15,6 +15,8 @@ import {
   DollarSign,
   Calendar,
   UsersIcon,
+  Heart,
+  Share2,
 } from "lucide-react-native";
 
 export default function Home() {
@@ -22,24 +24,31 @@ export default function Home() {
     <View>
       <View className="h-14"></View>
 
-      <Text className="font-bold text-lg text-center my-4">LinkUp</Text>
+      <Text className="font-bold text-lg text-center my-4">
+        Link<Text className="text-pink-500">Up</Text>
+      </Text>
 
       <ScrollView>
         <View className="flex flex-col gap-y-2 py-2">
           {Array.from({ length: 13 }).map((_, index) => (
             <>
               <View className="flex flex-row gap-2 w-full px-4">
-                <View className="w-16 bg-red-300">
+                <View className="w-16">
                   <Image
                     source={{
-                      uri: "https://twitter.com/prathamesh_io/photo",
+                      uri: "https://pbs.twimg.com/profile_images/1699481797158121472/Q0Cefxy8_400x400.jpg",
                     }}
                     style={{ width: 50, height: 50, borderRadius: 50 }}
+                    width={50}
+                    height={50}
                   />
                 </View>
 
                 <View className="flex-1 flex flex-col">
-                  <Text className="font-bold text-md">Vape Lover</Text>
+                  <View className="flex flex-row gap-x-2 items-center">
+                    <Text className="font-bold text-md">Vape Lover</Text>
+                    <Text className="text-gray-500 text-sm">• 1d ago</Text>
+                  </View>
 
                   <View className="h-2"></View>
 
@@ -49,11 +58,23 @@ export default function Home() {
                     to carry one in airports and also in college lecture
                   </Text>
 
+                  <View className="h-2.5"></View>
+
                   <Image
                     source={{
                       uri: "https://pbs.twimg.com/media/GLrHV1fbcAAA870?format=jpg&name=large",
                     }}
+                    height={300}
+                    className="rounded-xl"
                   />
+
+                  <View className="h-3"></View>
+
+                  <View className="flex flex-row gap-2 justify-between">
+                    <Heart color="gray" size={16} />
+                    <MessageCircle color="gray" size={16} />
+                    <Share2 color="gray" size={16} />
+                  </View>
                 </View>
               </View>
 
