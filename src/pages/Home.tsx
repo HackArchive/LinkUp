@@ -6,6 +6,7 @@ import {
   TouchableOpacity,
   Platform,
   Image,
+  ScrollView,
 } from "react-native";
 import { twMerge } from "tailwind-merge";
 import {
@@ -19,18 +20,53 @@ import {
 export default function Home() {
   return (
     <View>
-      <Text className="text-red-500">Home screen</Text>
+      <View className="h-14"></View>
 
-      <View className="flex flex-col gap-y-4 justify-center items-center bg-red-200 px-4 my-8">
-        {Array.from({ length: 3 }).map((_, index) => (
-          <EventCard />
-        ))}
-      </View>
+      <Text className="font-bold text-lg text-center my-4">LinkUp</Text>
+
+      <ScrollView>
+        <View className="flex flex-col gap-y-2 py-2">
+          {Array.from({ length: 13 }).map((_, index) => (
+            <>
+              <View className="flex flex-row gap-2 w-full px-4">
+                <View className="w-16 bg-red-300">
+                  <Image
+                    source={{
+                      uri: "https://twitter.com/prathamesh_io/photo",
+                    }}
+                    style={{ width: 50, height: 50, borderRadius: 50 }}
+                  />
+                </View>
+
+                <View className="flex-1 flex flex-col">
+                  <Text className="font-bold text-md">Vape Lover</Text>
+
+                  <View className="h-2"></View>
+
+                  <Text className="break-words">
+                    I'm a vape lover, I absolutely love vapes, especially the
+                    blueberry one. I really hope they leagalize it and allow me
+                    to carry one in airports and also in college lecture
+                  </Text>
+
+                  <Image
+                    source={{
+                      uri: "https://pbs.twimg.com/media/GLrHV1fbcAAA870?format=jpg&name=large",
+                    }}
+                  />
+                </View>
+              </View>
+
+              <View className="h-[0px] my-4 border-b border-gray-300"></View>
+            </>
+          ))}
+        </View>
+      </ScrollView>
     </View>
   );
 }
 
-export function EventCard() {
+export function PostCard() {
   return (
     <Pressable
       className="bg-[#131313] p-4 my-2 rounded-2xl w-full"
