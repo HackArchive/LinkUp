@@ -2,6 +2,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Home from '../pages/Home';
 import Icon from "react-native-vector-icons/Ionicons";
 import COLORS from "../constants/colors"
+import CreatePost from '../pages/CreatePost';
 
 const Tab = createBottomTabNavigator();
 
@@ -38,7 +39,7 @@ export default function BottomNav() {
     >
       <Tab.Screen name="Events" component={Home} />
       <Tab.Screen name="Profile" component={Home} />
-      <Tab.Screen name="CreateEvent" component={Home} />
+      <Tab.Screen name="CreateEvent" component={CreatePost} />
     </Tab.Navigator>
   );
 }
