@@ -1,16 +1,26 @@
 import { StatusBar } from 'expo-status-bar';
 import { NavigationContainer } from '@react-navigation/native';
-import { StyleSheet, Text, View } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import Login from './src/pages/auth/Login';
+import { useFonts } from 'expo-font';
+import AppLoading from './src/components/AppLoading';
 import BottomNav from './src/navigation/BottomNavigation';
-import { SafeAreaProvider } from 'react-native-safe-area-context';
 
 export default function App() {
+  const [fontsLoaded] = useFonts({
+    'Blink': require('./assets/fonts/Blink.ttf'),
+    'Billa-Bong': require('./assets/fonts/Billabong.ttf'),
+  });
+  if (!fontsLoaded) {
+    return <AppLoading />
+  }
   return (
-    <SafeAreaProvider className='flex-1 bg-slate-500'>
+    <SafeAreaView className='flex-1'>
       <StatusBar style="auto" />
       <NavigationContainer>
         <BottomNav />
       </NavigationContainer>
-    </SafeAreaProvider>
+      {/* <Login /> */}
+    </SafeAreaView>
   );
 }
